@@ -44,7 +44,7 @@ For detailed info about the logic and usage patterns of Example42 modules check 
 * You can install and configure a single dDNS host/provider using a template (ie., the included one):
 
         class { 'ddclient': 
-          host_config => 'file',
+          hosts_config => 'file',
           template    => 'ddclient/ddclient.conf.erb',
           server      => 'ddns_provider',
           login       => 'myuser',
@@ -56,7 +56,7 @@ For detailed info about the logic and usage patterns of Example42 modules check 
 * Or you can configure multiple hosts using host\_config => 'concat' and ddclient::host define:
 
         class { 'ddclient': 
-          host_config   => 'concat',
+          hosts_config   => 'concat',
         }
 
         ddclient::host { 'my_ddns.hostname.com':
