@@ -224,7 +224,6 @@ class ddclient (
   $server              = params_lookup( 'server' ),
   $login               = params_lookup( 'login' ),
   $password            = params_lookup( 'password' ),
-  $protocol            = params_lookup( 'protocol' ),
   $hostname            = params_lookup( 'hostname' ),
   $service_autorestart = params_lookup( 'service_autorestart' , 'global' ),
   $options             = params_lookup( 'options' ),
