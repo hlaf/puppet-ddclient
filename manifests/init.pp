@@ -402,8 +402,8 @@ class ddclient (
     noop       => $ddclient::noops,
   }
 
-  ### Include custom class if $my_class is set
-  if $ddclient::my_class {
+  ### Include custom class if $my_class is set and not an empty string
+  if $ddclient::my_class != '' {
     include $ddclient::my_class
   }
 
