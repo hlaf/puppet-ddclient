@@ -388,18 +388,18 @@ class ddclient (
 
   ### Managed resources
   package { $ddclient::package:
-    ensure  => $ddclient::manage_package,
-    noop    => $ddclient::noops,
+    ensure => $ddclient::manage_package,
+    noop   => $ddclient::noops,
   }
 
   service { 'ddclient':
-    ensure     => $ddclient::manage_service_ensure,
-    name       => $ddclient::service,
-    enable     => $ddclient::manage_service_enable,
-    hasstatus  => $ddclient::service_status,
-    pattern    => $ddclient::process,
-    require    => Package[$ddclient::package],
-    noop       => $ddclient::noops,
+    ensure    => $ddclient::manage_service_ensure,
+    name      => $ddclient::service,
+    enable    => $ddclient::manage_service_enable,
+    hasstatus => $ddclient::service_status,
+    pattern   => $ddclient::process,
+    require   => Package[$ddclient::package],
+    noop      => $ddclient::noops,
   }
 
   ### Include custom class if $my_class is set and not an empty string
