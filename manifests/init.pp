@@ -339,12 +339,20 @@ class ddclient (
     default => '',
   }
 
-  $array_getip_options = is_array($getip_options) ? {
-    false     => $getip_options ? {
+  # $array_getip_options = is_array($getip_options) ? {
+  #   false     => $getip_options ? {
+  #     ''      => [],
+  #     default => [$getip_options],
+  #   },
+  #   default   => $getip_options,
+  # }
+  if (type($getip_options, 'generalized') =~ 'Array') {
+    $array_getip_options = $getip_options
+  } else {
+    $array_getip_options = {
       ''      => [],
       default => [$getip_options],
-    },
-    default   => $getip_options,
+    }
   }
 
   # How to manage ddclient configuration
