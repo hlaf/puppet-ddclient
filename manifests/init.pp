@@ -205,11 +205,6 @@
 #   Sadly, I couldn't find yet a better way to pass all these options.
 #   Suggestions are welcome
 #
-# [*protocol*]
-#   The protocol used by the the service.
-#   This is used by monitor, firewall and puppi (optional) components
-#   Can be defined also by the (top scope) variable $ddclient_protocol
-#
 #
 # See README for usage patterns.
 #
@@ -264,8 +259,7 @@ class ddclient (
   $getip_options       = params_lookup( 'getip_options' ),
   $port                = params_lookup( 'port' ),
   $protocol            = params_lookup( 'protocol' )
-  ) inherits ddclient::params {
-
+) inherits ddclient::params {
   $bool_service_autorestart=any2bool($service_autorestart)
   $bool_absent=any2bool($absent)
   $bool_disable=any2bool($disable)
@@ -295,7 +289,7 @@ class ddclient (
 
   $manage_service_ensure = $ddclient::bool_disable ? {
     true    => 'stopped',
-    default =>  $ddclient::bool_absent ? {
+    default => $ddclient::bool_absent ? {
       true    => 'stopped',
       default => 'running',
     },
@@ -391,7 +385,7 @@ class ddclient (
         protocol => $ddclient::protocol,
       }
     }
-    default: { }
+    default: {}
   }
 
   ### Managed resources
@@ -425,7 +419,6 @@ class ddclient (
       noop      => $ddclient::noops,
     }
   }
-
 
   ### Service monitoring, if enabled ( monitor => true )
   if $ddclient::bool_monitor == true {
@@ -465,5 +458,4 @@ class ddclient (
       noop    => $ddclient::noops,
     }
   }
-
 }
