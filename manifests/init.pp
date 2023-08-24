@@ -340,7 +340,7 @@ class ddclient (
   #   },
   #   default   => $getip_options,
   # }
-  if (type($getip_options, 'generalized') =~ 'Array') {
+  if type($getip_options, 'generalized') =~ Type[Array] {
     $array_getip_options = $getip_options
   } else {
     $array_getip_options = {
