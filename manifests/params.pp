@@ -16,35 +16,35 @@ class ddclient::params {
 
   ### Application related parameters
 
-  $package = $::operatingsystem ? {
+  $package = $facts['os']['name'] ? {
     default => 'ddclient',
   }
 
-  $service = $::operatingsystem ? {
+  $service = $facts['os']['name'] ? {
     default => 'ddclient',
   }
 
-  $service_status = $::operatingsystem ? {
+  $service_status = $facts['os']['name'] ? {
     default => true,
   }
 
-  $process = $::operatingsystem ? {
+  $process = $facts['os']['name'] ? {
     default => 'ddclient',
   }
 
-  $process_args = $::operatingsystem ? {
+  $process_args = $facts['os']['name'] ? {
     default => '',
   }
 
-  $process_user = $::operatingsystem ? {
+  $process_user = $facts['os']['name'] ? {
     default => 'ddclient',
   }
 
-  $config_dir = $::operatingsystem ? {
+  $config_dir = $facts['os']['name'] ? {
     default => '/etc',
   }
 
-  $config_file = $::operatingsystem ? {
+  $config_file = $facts['os']['name'] ? {
     default => "${config_dir}/ddclient.conf",
   }
 
@@ -68,36 +68,36 @@ class ddclient::params {
   $protocol = ''
   $hostname = ''
 
-  $config_file_mode = $::operatingsystem ? {
+  $config_file_mode = $facts['os']['name'] ? {
     default => '0600',
   }
 
-  $config_file_owner = $::operatingsystem ? {
+  $config_file_owner = $facts['os']['name'] ? {
     default => 'root',
   }
 
-  $config_file_group = $::operatingsystem ? {
+  $config_file_group = $facts['os']['name'] ? {
     default => 'root',
   }
 
-  $config_file_init = $::operatingsystem ? {
+  $config_file_init = $facts['os']['name'] ? {
     /(?i:Debian|Ubuntu|Mint)/ => '/etc/default/ddclient',
     default                   => '/etc/sysconfig/ddclient',
   }
 
-  $pid_file = $::operatingsystem ? {
+  $pid_file = $facts['os']['name'] ? {
     default => '/var/run/ddclient.pid',
   }
 
-  $data_dir = $::operatingsystem ? {
+  $data_dir = $facts['os']['name'] ? {
     default => '/etc/ddclient',
   }
 
-  $log_dir = $::operatingsystem ? {
+  $log_dir = $facts['os']['name'] ? {
     default => '/var/log/ddclient',
   }
 
-  $log_file = $::operatingsystem ? {
+  $log_file = $facts['os']['name'] ? {
     default => '/var/log/ddclient/ddclient.log',
   }
 
