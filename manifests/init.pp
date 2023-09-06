@@ -52,35 +52,6 @@
 #   Use this when the service is managed by a tool like a cluster software
 #   Can be defined also by the (top scope) variable $ddclient_disableboot
 #
-# [*monitor*]
-#   Set to 'true' to enable monitoring of the services provided by the module
-#   Can be defined also by the (top scope) variables $ddclient_monitor
-#   and $monitor
-#
-# [*monitor_tool*]
-#   Define which monitor tools (ad defined in Example42 monitor module)
-#   you want to use for ddclient checks
-#   Can be defined also by the (top scope) variables $ddclient_monitor_tool
-#   and $monitor_tool
-#
-# [*monitor_target*]
-#   The Ip address or hostname to use as a target for monitoring tools.
-#   Default is the fact $facts['networking']['ip']
-#   Can be defined also by the (top scope) variables $ddclient_monitor_target
-#   and $monitor_target
-#
-# [*puppi*]
-#   Set to 'true' to enable creation of module data files that are used by puppi
-#   Can be defined also by the (top scope) variables $ddclient_puppi and $puppi
-#
-# [*puppi_helper*]
-#   Specify the helper to use for puppi commands. The default for this module
-#   is specified in params.pp and is generally a good choice.
-#   You can customize the output of puppi commands for this module using another
-#   puppi helper. Use the define puppi::helper to create a new custom helper
-#   Can be defined also by the (top scope) variables $ddclient_puppi_helper
-#   and $puppi_helper
-#
 # [*debug*]
 #   Set to 'true' to enable modules debugging
 #   Can be defined also by the (top scope) variables $ddclient_debug and $debug
@@ -213,22 +184,22 @@
 #   Javier Bertoli <javier@netmanagers.com.ar/>
 #
 class ddclient (
-  $my_class            = '',
+  String $my_class            = '',
   $source              = $ddclient::params::source,
   $template            = $ddclient::params::template,
   $server              = $ddclient::params::server,
   $login               = $ddclient::params::login,
   $password            = $ddclient::params::password,
   $hostname            = $ddclient::params::hostname,
-  $service_autorestart = true,
-  $options             = '',
-  $version             = 'present',
-  $absent              = false,
-  $disable             = false,
-  $disableboot         = false,
-  $debug               = false,
-  $audit_only          = false,
-  $noops               = false,
+  Boolean $service_autorestart = true,
+  String $options             = '',
+  String $version             = 'present',
+  Boolean $absent              = false,
+  Boolean $disable             = false,
+  Boolean $disableboot         = false,
+  Boolean $debug               = false,
+  Boolean $audit_only          = false,
+  Boolean $noops               = false,
   $package             = $ddclient::params::package,
   $service             = $ddclient::params::service,
   $service_status      = $ddclient::params::service_status,
@@ -258,8 +229,6 @@ class ddclient (
   $bool_absent=any2bool($absent)
   $bool_disable=any2bool($disable)
   $bool_disableboot=any2bool($disableboot)
-  $bool_monitor=any2bool($monitor)
-  $bool_puppi=any2bool($puppi)
   $bool_debug=any2bool($debug)
   $bool_audit_only=any2bool($audit_only)
   $bool_enable_syslog=any2bool($enable_syslog)
