@@ -65,7 +65,7 @@
 #
 # [*monitor_target*]
 #   The Ip address or hostname to use as a target for monitoring tools.
-#   Default is the fact $ipaddress
+#   Default is the fact $facts['networking']['ip']
 #   Can be defined also by the (top scope) variables $ddclient_monitor_target
 #   and $monitor_target
 #

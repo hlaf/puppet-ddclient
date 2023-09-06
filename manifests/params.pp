@@ -120,7 +120,7 @@ class ddclient::params {
   ### General module variables that can have a site or per module default
   $monitor = false
   $monitor_tool = ''
-  $monitor_target = $::ipaddress
+  $monitor_target = $facts['networking']['ip']
   $puppi = false
   $puppi_helper = 'standard'
   $debug = false
