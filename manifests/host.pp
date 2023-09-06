@@ -20,7 +20,7 @@ define ddclient::host (
   $password  = '',
   $protocol  = '',
   $order     = '',
-  $enable    = true
+  Boolean $enable    = true
 ) {
 
   include ddclient
@@ -35,8 +35,11 @@ define ddclient::host (
     ''      => '50',
     default => $order,
   }
-
-  $ensure = bool2ensure($enable)
+  if ($enable) {
+    $ensure = present
+  } else {
+    $ensure = absent
+  }
 
 
   if ! defined(Concat[$ddclient::config_file]) {
