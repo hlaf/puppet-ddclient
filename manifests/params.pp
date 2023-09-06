@@ -118,11 +118,6 @@ class ddclient::params {
   $disableboot = false
 
   ### General module variables that can have a site or per module default
-  $monitor = false
-  $monitor_tool = ''
-  $monitor_target = $facts['networking']['ip']
-  $puppi = false
-  $puppi_helper = 'standard'
   $debug = false
   $audit_only = false
   $noops = false

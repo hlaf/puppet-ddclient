@@ -1,4 +1,4 @@
-# Puppet module: ddclient
+# Puppet module: ddclient)
 
 ## Getting started
 

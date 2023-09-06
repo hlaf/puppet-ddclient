@@ -213,27 +213,22 @@
 #   Javier Bertoli <javier@netmanagers.com.ar/>
 #
 class ddclient (
-  $my_class            = $ddclient::params::my_class,
+  $my_class            = '',
   $source              = $ddclient::params::source,
   $template            = $ddclient::params::template,
   $server              = $ddclient::params::server,
   $login               = $ddclient::params::login,
   $password            = $ddclient::params::password,
   $hostname            = $ddclient::params::hostname,
-  $service_autorestart = $ddclient::params::service_autorestart,
-  $options             = $ddclient::params::options,
-  $version             = $ddclient::params::version,
-  $absent              = $ddclient::params::absent,
-  $disable             = $ddclient::params::disable,
-  $disableboot         = $ddclient::params::disableboot,
-  $monitor             = $ddclient::params::monitor,
-  $monitor_tool        = $ddclient::params::monitor_tool,
-  $monitor_target      = $ddclient::params::monitor_target,
-  $puppi               = $ddclient::params::puppi,
-  $puppi_helper        = $ddclient::params::puppi_helper,
-  $debug               = $ddclient::params::debug,
-  $audit_only          = $ddclient::params::audit_only,
-  $noops               = $ddclient::params::noops,
+  $service_autorestart = true,
+  $options             = '',
+  $version             = 'present',
+  $absent              = false,
+  $disable             = false,
+  $disableboot         = false,
+  $debug               = false,
+  $audit_only          = false,
+  $noops               = false,
   $package             = $ddclient::params::package,
   $service             = $ddclient::params::service,
   $service_status      = $ddclient::params::service_status,
@@ -257,7 +252,6 @@ class ddclient (
   $enable_ssl          = $ddclient::params::enable_ssl,
   $getip_from          = $ddclient::params::getip_from,
   $getip_options       = $ddclient::params::getip_options,
-  $port                = $ddclient::params::port,
   $protocol            = $ddclient::params::protocol
 ) inherits ddclient::params {
   $bool_service_autorestart=any2bool($service_autorestart)
@@ -407,43 +401,6 @@ class ddclient (
   ### Include custom class if $my_class is set and not an empty string
   if $ddclient::my_class != '' {
     include $ddclient::my_class
-  }
-
-  ### Provide puppi data, if enabled ( puppi => true )
-  if $ddclient::bool_puppi == true {
-    $classvars=get_class_args()
-    puppi::ze { 'ddclient':
-      ensure    => $ddclient::manage_file,
-      variables => $classvars,
-      helper    => $ddclient::puppi_helper,
-      noop      => $ddclient::noops,
-    }
-  }
-
-  ### Service monitoring, if enabled ( monitor => true )
-  if $ddclient::bool_monitor == true {
-    if $ddclient::port != '' {
-      monitor::port { "ddclient_${ddclient::protocol}_${ddclient::port}":
-        protocol => $ddclient::protocol,
-        port     => $ddclient::port,
-        target   => $ddclient::monitor_target,
-        tool     => $ddclient::monitor_tool,
-        enable   => $ddclient::manage_monitor,
-        noop     => $ddclient::noops,
-      }
-    }
-    if $ddclient::service != '' {
-      monitor::process { 'ddclient_process':
-        process  => $ddclient::process,
-        service  => $ddclient::service,
-        pidfile  => $ddclient::pid_file,
-        user     => $ddclient::process_user,
-        argument => $ddclient::process_args,
-        tool     => $ddclient::monitor_tool,
-        enable   => $ddclient::manage_monitor,
-        noop     => $ddclient::noops,
-      }
-    }
   }
 
   ### Debugging, if enabled ( debug => true )
