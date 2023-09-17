@@ -15,8 +15,11 @@ pid=<%= scope.lookupvar("ddclient::pid_file") %>
 <% if scope.lookupvar("ddclient::real_enable_ssl") != '' -%>
 ssl=<%= scope.lookupvar("ddclient::real_enable_ssl") %>
 <% end -%>
-<% if scope.lookupvar("ddclient::getip_from") != '' -%>
-use=<%= scope.lookupvar("ddclient::getip_from") %><% if scope.lookupvar("ddclient::array_getip_options") != [] -%>,<%= scope.lookupvar("ddclient::array_getip_options") * ',' %><% end -%>
+# getip_from (lookupvar) set to <%= scope.lookupvar("ddclient::getip_from") %>
+<% if scope['ddclient::getip_from'] != '' -%>
+# getip_from set to <%= scope['ddclient::getip_from'] %>
+# with array_getip_options = <%= scope['ddclient::array_getip_options'] %>
+use=<%= scope['ddclient::getip_from'] %><% if scope['ddclient::array_getip_options'] != [] -%>,<%= scope['ddclient::array_getip_options'] * ',' %><% end -%>
 <% end -%>
 
 server=<%= scope.lookupvar('ddclient::server') %>, \

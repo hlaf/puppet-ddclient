@@ -13,7 +13,8 @@ pid=<%= scope.lookupvar("ddclient::pid_file") %>
 <% if scope.lookupvar("ddclient::real_enable_ssl") != '' -%>
 ssl=<%= scope.lookupvar("ddclient::real_enable_ssl") %>
 <% end -%>
+# getip_from (lookupvar) set to <%= scope.lookupvar("ddclient::getip_from") %>
 <% if scope.lookupvar("ddclient::getip_from") != '' -%>
-use=<%= @getip_from %><% if @array_getip_options -%>,<%= @array_getip_options.join(',') %><% end -%>
+use=<%= scope.lookupvar("ddclient::getip_from") %><% if scope.lookupvar("ddclient::array_getip_options") -%>,<% scope['ddclient::array_getip_options'].each_pair do |key, value| -%><%= key %>=<%= value %>,<% end -%><% end -%>
 <% end -%>
 

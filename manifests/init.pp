@@ -171,10 +171,11 @@
 #
 # [*getip_options*]
 #   Each method to get the current host IP has several options to configure it,
-#   so you can an array of options here, in the format
-#   ['option_name1=option_value1',..,'option_nameN=option_valueN']
-#   Sadly, I couldn't find yet a better way to pass all these options.
-#   Suggestions are welcome
+#   so you can an array of options here, in the format of a hash like:
+#   $getip_options => {
+#     option1 => 'value1',
+#     option2 => 'value2',
+#   }
 #
 #
 # See README for usage patterns.
@@ -222,7 +223,7 @@ class ddclient (
   $mailto              = $ddclient::params::mailto,
   $enable_ssl          = $ddclient::params::enable_ssl,
   $getip_from          = $ddclient::params::getip_from,
-  $getip_options       = $ddclient::params::getip_options,
+  Hash $getip_options       = $ddclient::params::getip_options,
   $protocol            = $ddclient::params::protocol
 ) inherits ddclient::params {
   $bool_service_autorestart=any2bool($service_autorestart)
@@ -304,14 +305,7 @@ class ddclient (
   #   },
   #   default   => $getip_options,
   # }
-  if type($getip_options, 'generalized') =~ Type[Array] {
-    $array_getip_options = $getip_options
-  } else {
-    $array_getip_options = {
-      ''      => [],
-      default => [$getip_options],
-    }
-  }
+  $array_getip_options = $getip_options
 
   # How to manage ddclient configuration
   case $ddclient::hosts_config {

@@ -106,7 +106,7 @@ class ddclient::params {
   $mailto = ''
   $enable_ssl = true
   $getip_from = ''
-  $getip_options = ''
+  $getip_options = {}
 
   # General Settings
   $my_class = ''
