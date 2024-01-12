@@ -276,6 +276,7 @@ class ddclient (
   $bool_debug=any2bool($debug)
   $bool_audit_only=any2bool($audit_only)
   $bool_enable_syslog=any2bool($enable_syslog)
+  $bool_enable_ssl=any2bool($enable_ssl)
 
   ### Definition of some variables used in the module
   $manage_package = $ddclient::bool_absent ? {
